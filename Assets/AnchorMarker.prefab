@@ -13,7 +13,7 @@ GameObject:
   - component: {fileID: 5310035837551978380}
   - component: {fileID: 3776346285194388234}
   m_Layer: 0
-  m_Name: Sphere
+  m_Name: AnchorMarker
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -58,7 +58,7 @@ MeshRenderer:
   m_RenderingLayerMask: 1
   m_RendererPriority: 0
   m_Materials:
-  - {fileID: 2100000, guid: 14e3cbb654e741c4dad817abb8b9960a, type: 2}
+  - {fileID: 2100000, guid: 5809e165fd5ae2848a84d6372ddee489, type: 2}
   m_StaticBatchInfo:
     firstSubMesh: 0
     subMeshCount: 0
