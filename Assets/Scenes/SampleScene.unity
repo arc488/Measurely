@@ -387,7 +387,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 50, y: -30, z: 0}
 --- !u!1 &180736417
 GameObject:
@@ -453,7 +453,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 5
+  m_RootOrder: 6
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &221931774
 GameObject:
@@ -1025,7 +1025,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153bae2d1e9dab4419364809df9b2906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  marker: {fileID: 1169338662}
+  marker: {fileID: 1909954440}
   anchorMarker: {fileID: 4801974799170825141, guid: 859b25bf47ff4a14cab2bb99683316ab,
     type: 3}
   meterText: {fileID: 160041351323208835, guid: eacd6d1a8ee0af042b1910654f91235e,
@@ -1043,7 +1043,7 @@ Transform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
-  m_RootOrder: 3
+  m_RootOrder: 4
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1109006834
 PrefabInstance:
@@ -1171,12 +1171,6 @@ PrefabInstance:
       objectReference: {fileID: 0}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd19d3545dce12a4aaeb45ed54387f39, type: 3}
---- !u!1 &1169338662 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 4801974799170825141, guid: cd19d3545dce12a4aaeb45ed54387f39,
-    type: 3}
-  m_PrefabInstance: {fileID: 1169338661}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1560830257
 GameObject:
   m_ObjectHideFlags: 0
@@ -1278,6 +1272,12 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!1 &1909954440 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 856685313995772122, guid: cd19d3545dce12a4aaeb45ed54387f39,
+    type: 3}
+  m_PrefabInstance: {fileID: 1169338661}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2012981874
 GameObject:
   m_ObjectHideFlags: 0
@@ -1307,5 +1307,5 @@ Transform:
   m_Children:
   - {fileID: 1560830258}
   m_Father: {fileID: 0}
-  m_RootOrder: 4
+  m_RootOrder: 5
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
