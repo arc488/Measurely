@@ -21,8 +21,8 @@ public class SceneController : MonoBehaviour
     public class DistanceMarker
     {
         public Anchor anchor;
+        public GameObject anchorMarker;
         public GameObject distanceDisplayInstance;
-        public bool distanceDrawn = false;
     }
 
     void Start()
@@ -35,18 +35,21 @@ public class SceneController : MonoBehaviour
     void Update()
     {
         if (Session.Status != SessionStatus.Tracking) return;
+        if (distanceMarkers == null) distanceMarkers = new List<DistanceMarker>();
 
         ControlMarker();
         RotateDistances();
 
-        if (distanceMarkers.Count < 2)
+        if (distanceMarkers.Count < 1)
         {
             line.enabled = false;
             return;
         }
 
         DrawLines();
-        CreateDistanceMarkers();
+
+        if (distanceMarkers.Count < 2) return;
+
         UpdateDistances();
     }
 
@@ -76,42 +79,31 @@ public class SceneController : MonoBehaviour
     {
         line.enabled = true;
 
-        line.positionCount = distanceMarkers.Count;
+        line.positionCount = distanceMarkers.Count + 1;
 
         for (int i = 0; i < distanceMarkers.Count; i++)
         {
             var position = distanceMarkers[i].anchor.transform.position;
             line.SetPosition(i, position);
         }
+
+        line.SetPosition(line.positionCount - 1, marker.transform.position);
     }
 
-
-    public void CreateDistanceMarkers()
-    {
-        for (int i = 0; i < distanceMarkers.Count; i++)
-        {
-            if (distanceMarkers[i].distanceDrawn == true) return;
-
-            var distanceDisplayInstance = Instantiate(meterText);
-            distanceMarkers[i].distanceDisplayInstance = distanceDisplayInstance;
-
-            distanceMarkers[i].distanceDrawn = true;
-        }
-    }
 
     public void UpdateDistances()
     {
-        for (int i = 0; i < distanceMarkers.Count; i++)
+        for (int i = 1; i < distanceMarkers.Count; i++)
         {
-            var distanceDisplayInstance = distanceMarkers[i].distanceDisplayInstance;
+            var instance = distanceMarkers[i].distanceDisplayInstance;
 
-            var distance = Vector3.Distance(distanceMarkers[i].anchor.transform.position, distanceMarkers[i + 1].anchor.transform.position);
+            var distance = Vector3.Distance(distanceMarkers[i].anchor.transform.position, distanceMarkers[i - 1].anchor.transform.position);
 
-            var text = distanceDisplayInstance.GetComponentInChildren<TextMeshPro>();
+            var text = instance.GetComponentInChildren<TextMeshPro>();
 
-            var displayPosition = (distanceMarkers[i].anchor.transform.position + distanceMarkers[i + 1].anchor.transform.position) / 2;
+            var displayPosition = (distanceMarkers[i].anchor.transform.position + distanceMarkers[i - 1].anchor.transform.position) / 2;
             displayPosition.y += 0.2f;
-            distanceDisplayInstance.transform.position = displayPosition;
+            instance.transform.position = displayPosition;
 
             text.text = string.Format("{0:#.00} m", distance);
 
@@ -132,22 +124,30 @@ public class SceneController : MonoBehaviour
     {
         if (distanceMarkers.Count - 1 < 0) return;
         Destroy(distanceMarkers[distanceMarkers.Count - 1].distanceDisplayInstance);
+        Destroy(distanceMarkers[distanceMarkers.Count - 1].anchorMarker);
+        Destroy(distanceMarkers[distanceMarkers.Count - 1].anchor);
         distanceMarkers.RemoveAt(distanceMarkers.Count - 1);      
     }
 
     public void ClearAll()
     {
-        for (int i = 0; i < distanceMarkers.Count; i++)
+        if (distanceMarkers.Count - 1 < 0) return;
+        while (distanceMarkers.Count > 0)
         {
-            Destroy(distanceMarkers[i].distanceDisplayInstance);
-            distanceMarkers.RemoveAt(i);
+            Destroy(distanceMarkers[distanceMarkers.Count - 1].distanceDisplayInstance);
+            Destroy(distanceMarkers[distanceMarkers.Count - 1].anchorMarker);
+            Destroy(distanceMarkers[distanceMarkers.Count - 1].anchor);
+            distanceMarkers.RemoveAt(distanceMarkers.Count - 1);
         }
 
-        var objects = GameObject.FindGameObjectsWithTag("DistanceMarker");
-        foreach (var myObject in objects)
-        {
-            Destroy(myObject);
-        }
+
+
+        //distanceMarkers[i].GetType().GetProperties()
+        //var objects = GameObject.FindGameObjectsWithTag("DistanceMarker");
+        //foreach (var myObject in objects)
+        //{
+        //    Destroy(myObject);
+        //}
     }
 
     public void AddToList()
@@ -155,8 +155,9 @@ public class SceneController : MonoBehaviour
         var dm = new DistanceMarker();
 
         dm.anchor = Session.CreateAnchor(currentPose);
-        dm.distanceDisplayInstance = null;
-        dm.distanceDrawn = false;
+        dm.distanceDisplayInstance = Instantiate(meterText);
+        dm.anchorMarker = Instantiate(anchorMarker);
+        dm.anchorMarker.transform.position = dm.anchor.transform.position;
        
         distanceMarkers.Add(dm);
     }
