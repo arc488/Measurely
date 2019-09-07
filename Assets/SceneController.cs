@@ -15,8 +15,19 @@ public class SceneController : MonoBehaviour
 
     List<DistanceMarker> distanceMarkers;
 
+    AppMode appMode;
     LineRenderer line;
     Pose currentPose;
+
+    /// <summary>
+    /// Contains enums
+    /// </summary>
+    #region Enums
+    public enum AppMode
+    {
+        edit,
+        add
+    }
 
     public class DistanceMarker
     {
@@ -24,10 +35,24 @@ public class SceneController : MonoBehaviour
         public GameObject anchorMarker;
         public GameObject distanceDisplayInstance;
     }
+    #endregion
+
+    #region Toggle app mode methods
+    public void EditMode()
+    {
+        appMode = AppMode.edit;
+    }
+
+    public void AddMode()
+    {
+        appMode = AppMode.add;
+    }
+    #endregion
 
     void Start()
     {
         distanceMarkers = new List<DistanceMarker>();
+        appMode = AppMode.add;
         CreateLineRenderer();
     }
 
@@ -57,7 +82,7 @@ public class SceneController : MonoBehaviour
     {
         TrackableHit hit;
         TrackableHitFlags filter;
-        filter = TrackableHitFlags.FeaturePoint | TrackableHitFlags.PlaneWithinBounds | TrackableHitFlags.PlaneWithinPolygon;
+        filter = TrackableHitFlags.PlaneWithinBounds | TrackableHitFlags.PlaneWithinPolygon; //| TrackableHitFlags.FeaturePoint ;
 
         if (Frame.Raycast(Screen.width * 0.5f, Screen.height * 0.5f, filter, out hit))
         {
@@ -111,22 +136,13 @@ public class SceneController : MonoBehaviour
     }
  
 
-    private void CreateLineRenderer()
-    {
-        line = this.gameObject.AddComponent<LineRenderer>();
-        line.startColor = Color.green;
-        line.endColor = Color.green;
-        line.startWidth = 0.05f;
-        line.endWidth = 0.05f;
-    }
+
+    #region Removal methods
 
     public void UndoLast()
     {
         if (distanceMarkers.Count - 1 < 0) return;
-        Destroy(distanceMarkers[distanceMarkers.Count - 1].distanceDisplayInstance);
-        Destroy(distanceMarkers[distanceMarkers.Count - 1].anchorMarker);
-        Destroy(distanceMarkers[distanceMarkers.Count - 1].anchor);
-        distanceMarkers.RemoveAt(distanceMarkers.Count - 1);      
+        RemoveMarker();
     }
 
     public void ClearAll()
@@ -134,21 +150,19 @@ public class SceneController : MonoBehaviour
         if (distanceMarkers.Count - 1 < 0) return;
         while (distanceMarkers.Count > 0)
         {
-            Destroy(distanceMarkers[distanceMarkers.Count - 1].distanceDisplayInstance);
-            Destroy(distanceMarkers[distanceMarkers.Count - 1].anchorMarker);
-            Destroy(distanceMarkers[distanceMarkers.Count - 1].anchor);
-            distanceMarkers.RemoveAt(distanceMarkers.Count - 1);
+            RemoveMarker();
         }
-
-
-
-        //distanceMarkers[i].GetType().GetProperties()
-        //var objects = GameObject.FindGameObjectsWithTag("DistanceMarker");
-        //foreach (var myObject in objects)
-        //{
-        //    Destroy(myObject);
-        //}
     }
+
+    public void RemoveMarker()
+    {
+        Destroy(distanceMarkers[distanceMarkers.Count - 1].distanceDisplayInstance);
+        Destroy(distanceMarkers[distanceMarkers.Count - 1].anchorMarker);
+        Destroy(distanceMarkers[distanceMarkers.Count - 1].anchor);
+        distanceMarkers.RemoveAt(distanceMarkers.Count - 1);
+    }
+    #endregion
+
 
     public void AddToList()
     {
@@ -160,5 +174,14 @@ public class SceneController : MonoBehaviour
         dm.anchorMarker.transform.position = dm.anchor.transform.position;
        
         distanceMarkers.Add(dm);
+    }
+
+    private void CreateLineRenderer()
+    {
+        line = this.gameObject.AddComponent<LineRenderer>();
+        line.startColor = Color.green;
+        line.endColor = Color.green;
+        line.startWidth = 0.05f;
+        line.endWidth = 0.05f;
     }
 }
