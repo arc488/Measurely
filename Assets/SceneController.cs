@@ -5,6 +5,7 @@ using GoogleARCore;
 using System.IO;
 using System;
 using TMPro;
+using UnityEngine.UI;
 
 public class SceneController : MonoBehaviour
 {
@@ -12,6 +13,10 @@ public class SceneController : MonoBehaviour
     [SerializeField] GameObject anchorMarker = null;
     [SerializeField] GameObject meterText = null;
     [SerializeField] Camera firstPersonCamera = null;
+
+    [SerializeField] GameObject editButton;
+    [SerializeField] GameObject drawButton;
+    [SerializeField] GameObject addButton;
 
     List<DistanceMarker> distanceMarkers;
 
@@ -26,7 +31,7 @@ public class SceneController : MonoBehaviour
     public enum AppMode
     {
         edit,
-        add
+        draw
     }
 
     public class DistanceMarker
@@ -41,18 +46,27 @@ public class SceneController : MonoBehaviour
     public void EditMode()
     {
         appMode = AppMode.edit;
+        drawButton.SetActive(true);
+        editButton.SetActive(false);
+        addButton.SetActive(false);
+        marker.SetActive(false);
     }
 
-    public void AddMode()
+    public void DrawMode()
     {
-        appMode = AppMode.add;
+        appMode = AppMode.draw;
+        drawButton.SetActive(false);
+        editButton.SetActive(true);
+        addButton.SetActive(true);
+        marker.SetActive(true);
+
     }
     #endregion
 
     void Start()
     {
         distanceMarkers = new List<DistanceMarker>();
-        appMode = AppMode.add;
+        appMode = AppMode.draw;
         CreateLineRenderer();
     }
 
@@ -112,6 +126,7 @@ public class SceneController : MonoBehaviour
             line.SetPosition(i, position);
         }
 
+        if (appMode == AppMode.edit) return;
         line.SetPosition(line.positionCount - 1, marker.transform.position);
     }
 
