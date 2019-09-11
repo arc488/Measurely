@@ -78,6 +78,7 @@ public class SceneController : MonoBehaviour
 
         ControlMarker();
         RotateDistances();
+        displayGizmos();
 
         if (distanceMarkers.Count < 1)
         {
@@ -118,7 +119,7 @@ public class SceneController : MonoBehaviour
     {
         line.enabled = true;
 
-        line.positionCount = distanceMarkers.Count + 1;
+        line.positionCount = appMode == AppMode.draw ? distanceMarkers.Count + 1 : distanceMarkers.Count;
 
         for (int i = 0; i < distanceMarkers.Count; i++)
         {
@@ -178,6 +179,17 @@ public class SceneController : MonoBehaviour
     }
     #endregion
 
+
+    public void displayGizmos()
+    {
+        if (distanceMarkers.Count < 1) return;
+        bool gizmosEnabled = false;
+        gizmosEnabled = appMode == AppMode.draw ? false : true;
+        foreach (var distanceMarker in distanceMarkers)
+        {
+            distanceMarker.anchorMarker.transform.GetChild(0).gameObject.SetActive(gizmosEnabled);
+        }
+    }
 
     public void AddToList()
     {
