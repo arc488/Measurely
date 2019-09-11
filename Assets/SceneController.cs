@@ -6,6 +6,8 @@ using System.IO;
 using System;
 using TMPro;
 using UnityEngine.UI;
+using System.IO;
+using System.Collections;
 
 public class SceneController : MonoBehaviour
 {
@@ -33,6 +35,7 @@ public class SceneController : MonoBehaviour
         edit,
         draw
     }
+    #endregion
 
     public class DistanceMarker
     {
@@ -40,7 +43,6 @@ public class SceneController : MonoBehaviour
         public GameObject anchorMarker;
         public GameObject distanceDisplayInstance;
     }
-    #endregion
 
     #region Toggle app mode methods
     public void EditMode()
@@ -78,7 +80,8 @@ public class SceneController : MonoBehaviour
 
         ControlMarker();
         RotateDistances();
-        displayGizmos();
+        DisplayGizmos();
+        UpdateAnchorPosition();
 
         if (distanceMarkers.Count < 1)
         {
@@ -150,7 +153,30 @@ public class SceneController : MonoBehaviour
 
         }
     }
- 
+
+    public void UpdateAnchorPosition()
+    {
+        if (appMode == AppMode.draw) return;
+        foreach (var distanceMarker in distanceMarkers)
+        {
+            distanceMarker.anchor.transform.position = distanceMarker.anchorMarker.transform.position;
+        }
+
+    }
+    #region TakeScreenshotMethods
+
+    public void TakeScreenshot()
+    {
+        var path = Application.persistentDataPath;
+        var files = Directory.GetFiles(path, "MES*");
+
+        var filename = "MES" + files.Length;
+        Debug.Log(filename);
+        ScreenCapture.CaptureScreenshot(filename);
+
+    }
+
+    #endregion
 
 
     #region Removal methods
@@ -180,7 +206,7 @@ public class SceneController : MonoBehaviour
     #endregion
 
 
-    public void displayGizmos()
+    public void DisplayGizmos()
     {
         if (distanceMarkers.Count < 1) return;
         bool gizmosEnabled = false;
