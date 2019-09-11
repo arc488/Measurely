@@ -6,6 +6,7 @@ TagManager:
   tags:
   - ManipulationSystem
   - DistanceMarker
+  - GizmosCamera
   layers:
   - Default
   - TransparentFX
@@ -16,7 +17,7 @@ TagManager:
   - 
   - 
   - PostProcessing
-  - 
+  - Gizmos
   - 
   - 
   - 
