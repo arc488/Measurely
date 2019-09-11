@@ -1267,6 +1267,11 @@ PrefabInstance:
       propertyPath: m_Name
       value: ARCore Device
       objectReference: {fileID: 0}
+    - target: {fileID: 20155940112608238, guid: c10877f7cd5764de18d46d7b777d1faa,
+        type: 3}
+      propertyPath: m_CullingMask.m_Bits
+      value: 4294967295
+      objectReference: {fileID: 0}
     - target: {fileID: 4442908887562770, guid: c10877f7cd5764de18d46d7b777d1faa, type: 3}
       propertyPath: m_LocalPosition.x
       value: 0
@@ -1320,6 +1325,11 @@ PrefabInstance:
   m_Modification:
     m_TransformParent: {fileID: 0}
     m_Modifications:
+    - target: {fileID: 856685313995772122, guid: cd19d3545dce12a4aaeb45ed54387f39,
+        type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
     - target: {fileID: 4801974799170825141, guid: cd19d3545dce12a4aaeb45ed54387f39,
         type: 3}
       propertyPath: m_Name
@@ -1378,6 +1388,21 @@ PrefabInstance:
     - target: {fileID: 5558679817026559760, guid: cd19d3545dce12a4aaeb45ed54387f39,
         type: 3}
       propertyPath: m_LocalEulerAnglesHint.z
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 856685313995772102, guid: cd19d3545dce12a4aaeb45ed54387f39,
+        type: 3}
+      propertyPath: m_LocalPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 856685313995772102, guid: cd19d3545dce12a4aaeb45ed54387f39,
+        type: 3}
+      propertyPath: m_LocalPosition.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 856685313995772102, guid: cd19d3545dce12a4aaeb45ed54387f39,
+        type: 3}
+      propertyPath: m_LocalPosition.z
       value: 0
       objectReference: {fileID: 0}
     m_RemovedComponents: []
