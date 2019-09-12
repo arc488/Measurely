@@ -75,4 +75,16 @@ public class GalleryController : MonoBehaviour
         }
     }
 
+    public void NextImage()
+    {
+        if (images[displayImageIndex + 1] == null) return;
+        displayImageIndex += 1;
+    }
+
+    public void PreviousImage()
+    {
+        if (images[displayImageIndex - 1] == null) return;
+        displayImageIndex -= 1;
+    }
+
 }
