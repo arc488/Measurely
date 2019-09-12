@@ -163,18 +163,8 @@ public class SceneController : MonoBehaviour
         }
 
     }
-    #region TakeScreenshotMethods
+    #region ScreenshotMethods
 
-    public void TakeScreenshot()
-    {
-        var path = Application.persistentDataPath;
-        var files = Directory.GetFiles(path, "MES*");
-
-        var filename = "MES" + files.Length;
-        Debug.Log(filename);
-        ScreenCapture.CaptureScreenshot(filename);
-
-    }
 
     #endregion
 
