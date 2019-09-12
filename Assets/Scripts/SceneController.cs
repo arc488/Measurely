@@ -1,20 +1,15 @@
-﻿using System.Collections;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using UnityEngine;
 using GoogleARCore;
-using System.IO;
-using System;
 using TMPro;
-using UnityEngine.UI;
-using System.IO;
-using System.Collections;
 
 public class SceneController : MonoBehaviour
 {
+    [SerializeField] Camera firstPersonCamera = null;
+
     [SerializeField] GameObject marker = null;
     [SerializeField] GameObject anchorMarker = null;
     [SerializeField] GameObject meterText = null;
-    [SerializeField] Camera firstPersonCamera = null;
 
     [SerializeField] GameObject editButton;
     [SerializeField] GameObject drawButton;
@@ -26,16 +21,12 @@ public class SceneController : MonoBehaviour
     LineRenderer line;
     Pose currentPose;
 
-    /// <summary>
-    /// Contains enums
-    /// </summary>
     #region Enums
     public enum AppMode
     {
         edit,
         draw
     }
-    #endregion
 
     public class DistanceMarker
     {
@@ -43,6 +34,7 @@ public class SceneController : MonoBehaviour
         public GameObject anchorMarker;
         public GameObject distanceDisplayInstance;
     }
+    #endregion
 
     #region Toggle app mode methods
     public void EditMode()
@@ -108,6 +100,7 @@ public class SceneController : MonoBehaviour
             currentPose = hit.Pose;
         }
     }
+    #region Render markers and lines
 
     private void RotateDistances()
     {
@@ -163,13 +156,24 @@ public class SceneController : MonoBehaviour
         }
 
     }
+
+    private void CreateLineRenderer()
+    {
+        line = this.gameObject.AddComponent<LineRenderer>();
+        line.startColor = Color.green;
+        line.endColor = Color.green;
+        line.startWidth = 0.05f;
+        line.endWidth = 0.05f;
+    }
+
+    #endregion
+
     #region ScreenshotMethods
 
 
     #endregion
 
-
-    #region Removal methods
+    #region Marker removal methods
 
     public void UndoLast()
     {
@@ -215,16 +219,9 @@ public class SceneController : MonoBehaviour
         dm.distanceDisplayInstance = Instantiate(meterText);
         dm.anchorMarker = Instantiate(anchorMarker);
         dm.anchorMarker.transform.position = dm.anchor.transform.position;
-       
+
         distanceMarkers.Add(dm);
     }
 
-    private void CreateLineRenderer()
-    {
-        line = this.gameObject.AddComponent<LineRenderer>();
-        line.startColor = Color.green;
-        line.endColor = Color.green;
-        line.startWidth = 0.05f;
-        line.endWidth = 0.05f;
-    }
+
 }
