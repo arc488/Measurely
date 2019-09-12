@@ -822,7 +822,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1083268948}
+      - m_Target: {fileID: 2010035503}
         m_MethodName: TakeScreenshot
         m_Mode: 1
         m_Arguments:
@@ -1357,6 +1357,7 @@ GameObject:
   - component: {fileID: 805745036}
   - component: {fileID: 805745035}
   - component: {fileID: 805745034}
+  - component: {fileID: 805745037}
   m_Layer: 5
   m_Name: GalleryCanvas
   m_TagString: Untagged
@@ -1444,6 +1445,23 @@ Canvas:
   m_SortingLayerID: 0
   m_SortingOrder: 0
   m_TargetDisplay: 0
+--- !u!114 &805745037
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 805745032}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 6945472798fa04c4bbb99d8f21cc5bc5, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  imageDisplayer: {fileID: 45105832}
+  appCanvas: {fileID: 1560830261}
+  galleryCanvas: {fileID: 805745036}
+  displayImageIndex: 0
+  sprite: {fileID: 0}
 --- !u!1 &906232780
 GameObject:
   m_ObjectHideFlags: 0
@@ -1617,12 +1635,12 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 153bae2d1e9dab4419364809df9b2906, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  firstPersonCamera: {fileID: 332956618}
   marker: {fileID: 1909954440}
   anchorMarker: {fileID: 4801974799170825141, guid: 859b25bf47ff4a14cab2bb99683316ab,
     type: 3}
   meterText: {fileID: 160041351323208835, guid: eacd6d1a8ee0af042b1910654f91235e,
     type: 3}
-  firstPersonCamera: {fileID: 332956618}
   editButton: {fileID: 1953022135}
   drawButton: {fileID: 286440024}
   addButton: {fileID: 497327388}
@@ -1652,11 +1670,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: d00c98d2c8c6ea147980f76e3b423160, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  imageDisplayer: {fileID: 45105832}
   appCanvas: {fileID: 1560830261}
-  galleryCanvas: {fileID: 805745036}
-  currentDisplayerImage: 0
-  sprite: {fileID: 0}
 --- !u!1001 &1109006834
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -2285,7 +2299,7 @@ MonoBehaviour:
   m_OnClick:
     m_PersistentCalls:
       m_Calls:
-      - m_Target: {fileID: 1083268948}
+      - m_Target: {fileID: 805745037}
         m_MethodName: ShowGallery
         m_Mode: 1
         m_Arguments:
@@ -2335,6 +2349,50 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1973767938}
   m_CullTransparentMesh: 0
+--- !u!1 &2010035502
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 2010035504}
+  - component: {fileID: 2010035503}
+  m_Layer: 0
+  m_Name: TakeScreenshot
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &2010035503
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010035502}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: d00c98d2c8c6ea147980f76e3b423160, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  appCanvas: {fileID: 1560830261}
+--- !u!4 &2010035504
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 2010035502}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 603.7585, y: 307.52878, z: -749.7472}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 7
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &2012981874
 GameObject:
   m_ObjectHideFlags: 0
