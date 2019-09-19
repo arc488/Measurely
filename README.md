@@ -5,6 +5,7 @@ Measurely is the result of my playing around with ARCore and its features to fam
 Here are some screenshots and a gif.
 
 Gif:
+
 ![Gif](https://github.com/arc488/Measurely/blob/master/Screenshots/MeasurelyDemo.gif?raw=true)
 
 Screenshots:
