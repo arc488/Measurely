@@ -21,7 +21,7 @@ public class SceneController : MonoBehaviour
     LineRenderer line;
     Pose currentPose;
 
-    #region Enums
+    #region Enum and class
     public enum AppMode
     {
         edit,
@@ -59,6 +59,10 @@ public class SceneController : MonoBehaviour
 
     void Start()
     {
+        Screen.autorotateToLandscapeLeft = false;
+        Screen.autorotateToLandscapeRight = false;
+        Screen.autorotateToPortraitUpsideDown = false;
+
         distanceMarkers = new List<DistanceMarker>();
         appMode = AppMode.draw;
         CreateLineRenderer();
@@ -114,12 +118,12 @@ public class SceneController : MonoBehaviour
     private void DrawLines()
     {
         line.enabled = true;
-
+        line.alignment = LineAlignment.View;
         line.positionCount = appMode == AppMode.draw ? distanceMarkers.Count + 1 : distanceMarkers.Count;
 
         for (int i = 0; i < distanceMarkers.Count; i++)
         {
-            var position = distanceMarkers[i].anchor.transform.position;
+            var position = distanceMarkers[i].anchorMarker.transform.position;
             line.SetPosition(i, position);
         }
 
@@ -149,7 +153,7 @@ public class SceneController : MonoBehaviour
 
     public void UpdateAnchorPosition()
     {
-        if (appMode == AppMode.draw) return;
+        //if (appMode == AppMode.draw) return;
         foreach (var distanceMarker in distanceMarkers)
         {
             distanceMarker.anchor.transform.position = distanceMarker.anchorMarker.transform.position;
